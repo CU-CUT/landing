@@ -309,6 +309,35 @@
     .cats li:hover a { background: var(--acid); }
     .cats .where { font-family: "Special Elite", monospace; font-size: 0.85rem; opacity: 0.6; }
 
+    /* floppy the mascot */
+    .mascot {
+      margin-top: 34px;
+      max-width: 260px;
+      position: relative;
+      transform: rotate(2deg);
+    }
+    .mascot img {
+      display: block;
+      width: 240px;
+      image-rendering: pixelated;
+      border: 3px solid var(--paper);
+      box-shadow: 6px 7px 0 var(--pink);
+      filter: hue-rotate(-85deg) saturate(1.5);
+      animation: bob 3.4s ease-in-out infinite;
+    }
+    @keyframes bob {
+      0%, 100% { transform: translateY(0) rotate(0); }
+      50%      { transform: translateY(-8px) rotate(-1.5deg); }
+    }
+    .mascot-cap {
+      font-family: "Caveat", cursive;
+      font-size: 1.5rem;
+      color: var(--acid);
+      transform: rotate(-2deg);
+      display: inline-block;
+      margin-top: 12px;
+    }
+
     /* ══ wins ══ */
     .wins { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; }
     .win {
@@ -644,6 +673,10 @@
           <li><a href="https://github.com/cutter-org" target="_blank" rel="noopener"><span>cutter repo ↗</span><span class="where">github.com/cutter-org</span></a></li>
           <li><a href="https://t.me/CUT_live" target="_blank" rel="noopener"><span>our telegram ↗</span><span class="where">t.me/CUT_live</span></a></li>
         </ul>
+        <div class="mascot">
+          <img src="photos/floppy.png" alt="Floppy — CUT team mascot">
+          <div class="mascot-cap">floppy. the mascot. lives in the terminal, never pays rent</div>
+        </div>
       </div>
     </div>
   </section>
