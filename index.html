@@ -31,7 +31,6 @@
       color: var(--ink);
       font-family: "Special Elite", "Courier New", monospace;
       overflow-x: hidden;
-      cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text y="24" font-size="24" transform="rotate(-90 16 16)">✂️</text></svg>') 4 16, auto;
     }
 
     /* paper grain over everything */
@@ -45,7 +44,34 @@
       background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter><rect width="180" height="180" filter="url(%23n)" opacity="0.14"/></svg>');
     }
 
-    a { cursor: inherit; }
+    /* hide the native cursor — the flying scissors are the cursor */
+    @media (pointer: fine) {
+      * { cursor: none !important; }
+    }
+
+    /* flying scissors chasing the cursor */
+    #flying-scissors {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      pointer-events: none;
+      z-index: 1000;
+      will-change: transform;
+    }
+    #flying-scissors .blades {
+      display: inline-block;
+      animation: cutcut 0.4s infinite;
+    }
+    @keyframes cutcut {
+      0%, 100% { transform: scaleX(1); }
+      50%      { transform: scaleX(0.7); }
+    }
 
     .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; position: relative; }
 
@@ -311,6 +337,82 @@
     .win .event { font-family: "Archivo Black", sans-serif; margin-top: 22px; text-transform: uppercase; font-size: 1rem; }
     .win .year { font-size: 0.85rem; margin-top: 6px; opacity: 0.6; }
 
+    .stats-strip {
+      font-family: "Caveat", cursive;
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      color: var(--blue);
+      transform: rotate(-1deg);
+      display: inline-block;
+      margin: -20px 0 40px;
+    }
+    .stats-strip b { color: var(--red); }
+
+    /* full results — long receipt */
+    .receipt-title {
+      font-family: "Permanent Marker", cursive;
+      font-size: 1.5rem;
+      display: inline-block;
+      transform: rotate(-1.5deg);
+      background: var(--ink);
+      color: var(--paper);
+      padding: 8px 18px;
+      margin: 70px 0 26px;
+      box-shadow: 5px 5px 0 var(--pink);
+    }
+    .receipt {
+      background: #fff;
+      border: 2px solid var(--ink);
+      box-shadow: 8px 9px 0 rgba(19,19,19,0.85);
+      transform: rotate(-0.5deg);
+      padding: 20px 24px 26px;
+      position: relative;
+      max-width: 900px;
+    }
+    .receipt::before {
+      content: "";
+      position: absolute;
+      top: -14px;
+      left: 8%;
+      width: 110px;
+      height: 28px;
+      background: var(--tape);
+      transform: rotate(-3deg);
+      border-left: 2px dashed rgba(0,0,0,0.15);
+      border-right: 2px dashed rgba(0,0,0,0.15);
+    }
+    .receipt::after {
+      content: "";
+      position: absolute;
+      top: -14px;
+      right: 6%;
+      width: 90px;
+      height: 26px;
+      background: var(--tape);
+      transform: rotate(5deg);
+    }
+    .receipt table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    .receipt td { padding: 8px 8px; border-bottom: 2px dashed rgba(0,0,0,0.18); vertical-align: top; }
+    .receipt tr:last-child td { border-bottom: none; }
+    .receipt tr:hover td { background: rgba(234, 255, 0, 0.45); }
+    .receipt .d { white-space: nowrap; opacity: 0.55; font-size: 0.82rem; width: 86px; }
+    .receipt .r { text-align: right; font-family: "Archivo Black", sans-serif; font-size: 0.82rem; white-space: nowrap; }
+    .receipt tr.podium .r { color: var(--red); }
+    .receipt .gold {
+      background: var(--acid);
+      padding: 2px 7px;
+      border: 2px solid var(--ink);
+      display: inline-block;
+      transform: rotate(-2deg);
+    }
+    .receipt a { color: var(--blue); text-decoration-style: wavy; text-decoration-thickness: 1px; }
+    .receipt-end {
+      text-align: center;
+      font-family: "Caveat", cursive;
+      font-size: 1.4rem;
+      margin-top: 16px;
+      opacity: 0.7;
+    }
+
     /* ══ team ══ */
     #team { background: var(--acid); }
     #team h2::after { background: var(--pink); }
@@ -480,22 +582,64 @@
   <section id="wins">
     <div class="wrap">
       <h2>receipts 🧾</h2>
+      <div class="stats-strip"><b>30</b> CTFs played · <b>14</b> podiums · <b>6</b> first places (so far)</div>
       <div class="wins">
         <div class="win">
           <div class="place">1st</div>
-          <div class="event">Example Uni CTF</div>
-          <div class="year">2026 · quals + finals</div>
+          <div class="event">SOLAR Int'l Championship</div>
+          <div class="year">2025 · 1st in Russia, 2nd worldwide</div>
         </div>
         <div class="win">
-          <div class="place">top10</div>
-          <div class="event">Example National CTF</div>
-          <div class="year">2025 · jeopardy</div>
+          <div class="place">1st</div>
+          <div class="event">FSP Moscow Championship</div>
+          <div class="year">2025 · finals</div>
         </div>
         <div class="win">
-          <div class="place">3rd</div>
-          <div class="event">Example A/D Cup</div>
-          <div class="year">2025 · attack-defense</div>
+          <div class="place">1st</div>
+          <div class="event">AltayCTF</div>
+          <div class="year">2025 · finals, 1/12</div>
         </div>
+        <div class="win">
+          <div class="place">1st</div>
+          <div class="event">SibirCTF</div>
+          <div class="year">2026</div>
+        </div>
+        <div class="win">
+          <div class="place">1st</div>
+          <div class="event">Digital Sovereignty · UserGate</div>
+          <div class="year">2026</div>
+        </div>
+        <div class="win">
+          <div class="place">1+3</div>
+          <div class="event">eschatonCTF</div>
+          <div class="year">2026 · finals, two squads on the podium</div>
+        </div>
+      </div>
+
+      <div class="receipt-title">the highlight reel ↓</div>
+      <div class="receipt">
+        <table>
+          <tr class="podium"><td class="d">06.2025</td><td><a href="https://habr.com/en/companies/solarsecurity/articles/924676/" target="_blank" rel="noopener">SOLAR Int'l Championship</a></td><td class="r"><span class="gold">1st RU · 2nd 🌍</span></td></tr>
+          <tr class="podium"><td class="d">08.2025</td><td><a href="https://olymp.psuti.ru" target="_blank" rel="noopener">PSUTI CTF</a></td><td class="r">3/97</td></tr>
+          <tr><td class="d">09.2025</td><td>VolgaCTF</td><td class="r">9/23</td></tr>
+          <tr><td class="d">10.2025</td><td><a href="https://team.sibctf2025.ru" target="_blank" rel="noopener">SibCTF 2025 · quals</a></td><td class="r">10/149</td></tr>
+          <tr class="podium"><td class="d">10.2025</td><td><a href="https://uralctf.org/" target="_blank" rel="noopener">UralCUP</a></td><td class="r">2/15</td></tr>
+          <tr class="podium"><td class="d">10.2025</td><td>AltayCTF</td><td class="r"><span class="gold">1/12</span></td></tr>
+          <tr class="podium"><td class="d">11.2025</td><td>SibCTF 2025 · final</td><td class="r">3/12</td></tr>
+          <tr><td class="d">11.2025</td><td><a href="https://t.me/fsprussia/1612" target="_blank" rel="noopener">FSP Championship · quals</a></td><td class="r">top-5</td></tr>
+          <tr class="podium"><td class="d">11.2025</td><td>FSP Moscow Championship · finals</td><td class="r"><span class="gold">1st</span></td></tr>
+          <tr><td class="d">02.2026</td><td><a href="https://ctftime.org/event/3067/" target="_blank" rel="noopener">DUCKERZ CTF</a></td><td class="r">5th</td></tr>
+          <tr class="podium"><td class="d">02.2026</td><td><a href="https://t.me/fintechhubcbr/912" target="_blank" rel="noopener">Cybersecurity in Finance</a></td><td class="r">2nd</td></tr>
+          <tr class="podium"><td class="d">03.2026</td><td><a href="https://eschaton.mcsc.space/" target="_blank" rel="noopener">eschatonCTF 2026 · final</a></td><td class="r"><span class="gold">1st</span> &amp; 3rd</td></tr>
+          <tr><td class="d">04.2026</td><td><a href="https://ctftime.org/event/3204/" target="_blank" rel="noopener">AITU CTF</a></td><td class="r">8th</td></tr>
+          <tr class="podium"><td class="d">05.2026</td><td>CenterCTF</td><td class="r">2nd</td></tr>
+          <tr class="podium"><td class="d">05.2026</td><td><a href="https://ctfnews.ru/news/2173" target="_blank" rel="noopener">AD4ALL</a></td><td class="r">3rd</td></tr>
+          <tr class="podium"><td class="d">05.2026</td><td>Digital Sovereignty · UserGate</td><td class="r"><span class="gold">1st</span></td></tr>
+          <tr class="podium"><td class="d">05.2026</td><td>Digital Sovereignty · cloud lab track</td><td class="r">2nd</td></tr>
+          <tr class="podium"><td class="d">06.2026</td><td>SibirCTF</td><td class="r"><span class="gold">1st</span></td></tr>
+          <tr class="podium"><td class="d">2026</td><td>OrenHack</td><td class="r">2nd</td></tr>
+        </table>
+        <div class="receipt-end">✄ - - - thank you, come again - - - ✄</div>
       </div>
     </div>
   </section>
@@ -506,29 +650,44 @@
       <h2>the crew</h2>
       <div class="team">
         <div class="member">
-          <div class="face">🥷</div>
-          <div class="nick">player1</div>
-          <span class="role">web · yells the loudest (captain)</span>
+          <div class="face">💀</div>
+          <div class="nick">Rodion Gudz</div>
+          <span class="role">27 CTFs · literally never skips</span>
         </div>
         <div class="member">
-          <div class="face">💀</div>
-          <div class="nick">player2</div>
-          <span class="role">pwn · talks to segfaults</span>
+          <div class="face">🥷</div>
+          <div class="nick">Savva Serebryakov</div>
+          <span class="role">26 CTFs</span>
+        </div>
+        <div class="member">
+          <div class="face">🧨</div>
+          <div class="nick">Andrey Bakov</div>
+          <span class="role">26 CTFs</span>
         </div>
         <div class="member">
           <div class="face">🧠</div>
-          <div class="nick">player3</div>
-          <span class="role">crypto · does math for fun (??)</span>
+          <div class="nick">Leonid Antonyuk</div>
+          <span class="role">21 CTFs</span>
         </div>
         <div class="member">
           <div class="face">🔬</div>
-          <div class="nick">player4</div>
-          <span class="role">reverse · reads asm like memes</span>
+          <div class="nick">Mikhail Selin</div>
+          <span class="role">21 CTFs</span>
         </div>
         <div class="member">
           <div class="face">🕵️</div>
-          <div class="nick">player5</div>
-          <span class="role">forensics · will find your metadata</span>
+          <div class="nick">Maxim Chernyshkov</div>
+          <span class="role">18 CTFs</span>
+        </div>
+        <div class="member">
+          <div class="face">👾</div>
+          <div class="nick">Tagir Eminov</div>
+          <span class="role">16 CTFs</span>
+        </div>
+        <div class="member">
+          <div class="face">🎯</div>
+          <div class="nick">Alexander Poryadin</div>
+          <span class="role">5 CTFs</span>
         </div>
       </div>
       <div class="join-note">you go to Central Uni? you like flags? → dm us. we bite (challenges only)</div>
@@ -540,10 +699,10 @@
     <div class="wrap">
       <h2>yell at us</h2>
       <div class="links">
-        <a href="https://ctftime.org/" target="_blank" rel="noopener">CTFtime</a>
-        <a href="https://t.me/" target="_blank" rel="noopener">Telegram</a>
-        <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
-        <a href="mailto:team@example.com">Email</a>
+        <a href="https://ctftime.org/team/358931" target="_blank" rel="noopener">CTFtime</a>
+        <a href="https://t.me/CUT_live" target="_blank" rel="noopener">Telegram</a>
+        <a href="https://github.com/CU-CUT" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:cutter.ctf@gmail.com">Email</a>
       </div>
     </div>
   </section>
@@ -556,6 +715,35 @@
   </footer>
 
   <script>
+    // scissors chase the cursor, lagging behind and turning to face it
+    if (matchMedia('(pointer: fine)').matches) {
+      const sc = document.createElement('div');
+      sc.id = 'flying-scissors';
+      sc.innerHTML = '<span class="blades">✂️</span>';
+      document.body.appendChild(sc);
+
+      let mx = innerWidth / 2, my = innerHeight / 2;
+      let x = mx, y = my, ang = 0;
+
+      addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; });
+
+      // apple ✂️ has its blades pointing up-left (~135°); this offset aims them at the cursor
+      const BLADE_OFFSET = 135;
+
+      (function fly() {
+        x += (mx - x) * 0.11;
+        y += (my - y) * 0.11;
+        const dx = mx - x, dy = my - y;
+        if (Math.hypot(dx, dy) > 3) {
+          const target = Math.atan2(dy, dx) * 180 / Math.PI + BLADE_OFFSET;
+          const diff = ((target - ang + 540) % 360) - 180;
+          ang += diff * 0.18;
+        }
+        sc.style.transform = 'translate(' + (x - 18) + 'px,' + (y - 18) + 'px) rotate(' + ang + 'deg)';
+        requestAnimationFrame(fly);
+      })();
+    }
+
     // click anywhere → leave a fading snip mark
     document.addEventListener('click', (e) => {
       if (e.target.closest('a')) return;
