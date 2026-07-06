@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CUT ✂️ Central University Team</title>
+  <title>CUT</title>
   <meta name="description" content="CUT — Central University Team. Teenage CTF crew. We cut through web, pwn, crypto, reverse, forensics.">
   <link rel="icon" type="image/png" href="photos/scissors-apple.png">
   <style>
@@ -178,10 +178,8 @@
       display: inline-block;
       transition: transform 0.1s;
     }
-    .nav-links a:nth-child(1) { transform: rotate(3deg); }
-    .nav-links a:nth-child(2) { transform: rotate(-4deg); }
-    .nav-links a:nth-child(3) { transform: rotate(2deg); }
-    .nav-links a:nth-child(4) { transform: rotate(-3deg); }
+    .nav-links a:nth-child(odd)  { transform: rotate(3deg); }
+    .nav-links a:nth-child(even) { transform: rotate(-4deg); }
     .nav-links a:hover { transform: rotate(0deg) scale(1.25); color: var(--acid); }
 
     /* ══ hero ══ */
@@ -312,6 +310,13 @@
     .about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 50px; align-items: start; }
     .about-grid p { font-size: 1.1rem; margin-bottom: 1.2em; }
     .about-grid p b { color: var(--acid); }
+
+    .build-intro {
+      font-size: 1.1rem;
+      max-width: 52ch;
+      margin: -10px 0 10px;
+      transform: rotate(-0.4deg);
+    }
     .scrawl {
       font-family: "Caveat", cursive;
       font-size: 1.7rem;
@@ -399,6 +404,21 @@
       border-left: 2px dashed rgba(0,0,0,0.15);
       border-right: 2px dashed rgba(0,0,0,0.15);
     }
+    /* event photo glued on top of a win card */
+    .win .snap {
+      margin: -28px -22px 18px;
+      border-bottom: 2px solid var(--ink);
+      overflow: hidden;
+    }
+    .win .snap img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+      filter: sepia(0.45) contrast(1.15) saturate(0.8);
+    }
+    .win:hover .snap img { filter: none; }
+
     .win .place {
       font-family: "Permanent Marker", cursive;
       font-size: 3.2rem;
@@ -483,6 +503,52 @@
       font-size: 1.4rem;
       margin-top: 16px;
       opacity: 0.7;
+    }
+
+    /* loose photos taped next to the receipt */
+    .snaps-extra {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 34px;
+      margin-top: 50px;
+    }
+    .polaroid {
+      background: #fff;
+      border: 2px solid var(--ink);
+      padding: 10px 10px 12px;
+      box-shadow: 6px 7px 0 rgba(19,19,19,0.85);
+      transform: rotate(-2.5deg);
+      max-width: 300px;
+      position: relative;
+      transition: transform 0.12s;
+    }
+    .polaroid:nth-child(even) { transform: rotate(2deg) translateY(10px); }
+    .polaroid:hover { transform: rotate(0) scale(1.04); z-index: 2; }
+    .polaroid::before {
+      content: "";
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      width: 84px;
+      height: 24px;
+      background: var(--tape);
+      transform: translateX(-50%) rotate(-3deg);
+      border-left: 2px dashed rgba(0,0,0,0.15);
+      border-right: 2px dashed rgba(0,0,0,0.15);
+    }
+    .polaroid img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      filter: sepia(0.45) contrast(1.15) saturate(0.8);
+    }
+    .polaroid:hover img { filter: none; }
+    .polaroid .cap {
+      font-family: "Caveat", cursive;
+      font-size: 1.35rem;
+      margin-top: 8px;
+      transform: rotate(-1deg);
     }
 
     /* ══ team ══ */
@@ -679,6 +745,7 @@
       <div class="nav-links">
         <a href="#about">who?</a>
         <a href="#wins">wins</a>
+        <a href="#build">we build</a>
         <a href="#team">crew</a>
         <a href="#contact">yell at us</a>
       </div>
@@ -739,6 +806,7 @@
       <h2>receipts <svg class="ico" viewBox="0 0 24 24"><path d="M5 3h14v18l-2-1.5L15 21l-2-1.5L11 21l-2-1.5L7 21l-2-1.5V3z"/><path d="M9 8h6M9 12h6"/></svg></h2>
       <div class="wins">
         <div class="win">
+          <div class="snap"><img src="competitions/sibir2026-web.jpg" alt="CUT at SibirCTF 2026" loading="lazy"></div>
           <div class="place">1st</div>
           <div class="event">SibirCTF</div>
           <div class="year">2026</div>
@@ -754,41 +822,49 @@
           <div class="year">2026</div>
         </div>
         <div class="win">
+          <div class="snap"><img src="competitions/ad4all2026-web.jpg" alt="CUT at AD4ALL 2026" loading="lazy"></div>
           <div class="place">3rd</div>
           <div class="event">AD4ALL</div>
           <div class="year">2026 · attack-defense</div>
         </div>
         <div class="win">
+          <div class="snap"><img src="competitions/centerctf2026-web.jpg" alt="CUT at CenterCTF 2026" loading="lazy"></div>
           <div class="place">2nd</div>
           <div class="event">CenterCTF</div>
           <div class="year">2026</div>
         </div>
         <div class="win">
+          <div class="snap"><img src="competitions/eschaton2026-web.jpg" alt="CUT at eschatonCTF 2026" loading="lazy"></div>
           <div class="place">1+3</div>
           <div class="event">eschatonCTF</div>
           <div class="year">2026 · finals, two squads on the podium</div>
         </div>
         <div class="win">
+          <div class="snap"><img src="competitions/cyberfinance2026-web.jpg" alt="CUT at Cybersecurity in Finance 2026" loading="lazy"></div>
           <div class="place">2nd</div>
           <div class="event">Cybersecurity in Finance</div>
           <div class="year">2026</div>
         </div>
         <div class="win">
+          <div class="snap"><img src="competitions/fsp_champ_moscow2026-web.jpg" alt="CUT at FSP Moscow Championship finals" loading="lazy"></div>
           <div class="place">1st</div>
           <div class="event">FSP Moscow Championship</div>
           <div class="year">2025 · finals</div>
         </div>
         <div class="win">
+          <div class="snap"><img src="competitions/sibctf2025-web.jpg" alt="CUT at SibCTF 2025 finals" loading="lazy"></div>
           <div class="place">3rd</div>
           <div class="event">SibCTF</div>
           <div class="year">2025 · finals, 3/12</div>
         </div>
         <div class="win">
+          <div class="snap"><img src="competitions/altayctf2025-web.jpg" alt="CUT at AltayCTF 2025" loading="lazy"></div>
           <div class="place">1st</div>
           <div class="event">AltayCTF</div>
           <div class="year">2025 · finals, 1/12</div>
         </div>
         <div class="win">
+          <div class="snap"><img src="competitions/uralcup2025-web.jpg" alt="CUT at UralCUP 2025" loading="lazy"></div>
           <div class="place">2nd</div>
           <div class="event">UralCUP</div>
           <div class="year">2025 · 2/15</div>
@@ -799,11 +875,13 @@
           <div class="year">2025 · 3/97</div>
         </div>
         <div class="win">
+          <div class="snap"><img src="competitions/solar2025-web.jpg" alt="CUT at SOLAR International Championship 2025" loading="lazy"></div>
           <div class="place">1st</div>
           <div class="event">SOLAR Int'l Championship</div>
           <div class="year">2025 · 1st in Russia, 2nd worldwide</div>
         </div>
         <div class="win">
+          <div class="snap"><img src="competitions/orenhack2024-web.jpg" alt="CUT at OrenHack 2024" loading="lazy"></div>
           <div class="place">2nd</div>
           <div class="event">OrenHack</div>
           <div class="year">2024</div>
@@ -832,6 +910,38 @@
           <tr class="podium"><td class="d">2024</td><td>OrenHack</td><td class="r">2nd</td></tr>
         </table>
         <div class="receipt-end">✄ - - - thank you, come again - - - ✄</div>
+      </div>
+
+      <div class="snaps-extra">
+        <div class="polaroid">
+          <img src="competitions/volgactf2025-web.jpg" alt="CUT at VolgaCTF 2025" loading="lazy">
+          <div class="cap">VolgaCTF 2025 · 9/23, still counts</div>
+        </div>
+        <div class="polaroid">
+          <img src="competitions/aitu2026-web.jpg" alt="CUT at AITU CTF 2026" loading="lazy">
+          <div class="cap">AITU CTF 2026 · 8th place field trip</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="build">
+    <div class="wrap">
+      <h2>we also build CTFs <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M19.1 4.9l-2.8 2.8M7.7 16.3l-2.8 2.8"/></svg></h2>
+      <p class="build-intro">playing is only half the story. we also write the tasks, run the infra and host competitions ourselves — so other people can suffer for a change.</p>
+      <div class="snaps-extra">
+        <div class="polaroid">
+          <img src="develop/cu-school-ctf-2025-web.jpg" alt="CU School CTF 2025, built by CUT" loading="lazy">
+          <div class="cap">CU School CTF 2025 · our tasks, our infra</div>
+        </div>
+        <div class="polaroid">
+          <img src="develop/cu-school-ctf-2026-web.jpg" alt="CU School CTF 2026, built by CUT" loading="lazy">
+          <div class="cap">CU School CTF 2026 · round two, bigger</div>
+        </div>
+        <div class="polaroid">
+          <img src="develop/ctf-cup-2025-finals-web.jpg" alt="CTF Cup 2025 finals" loading="lazy">
+          <div class="cap">CTF Cup 2025 · finals crew</div>
+        </div>
       </div>
     </div>
   </section>
