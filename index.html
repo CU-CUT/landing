@@ -5,11 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CUT ✂️ Central University Team</title>
   <meta name="description" content="CUT — Central University Team. Teenage CTF crew. We cut through web, pwn, crypto, reverse, forensics.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✂️</text></svg>">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Permanent+Marker&family=Special+Elite&family=Caveat:wght@700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="photos/scissors-apple.png">
   <style>
+    /* self-hosted fonts — no external requests, works offline and from file:// */
+    @font-face {
+      font-family: "Archivo Black";
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url("fonts/archivo-black.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Permanent Marker";
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url("fonts/permanent-marker.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Special Elite";
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url("fonts/special-elite.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Caveat";
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url("fonts/caveat-700.woff2") format("woff2");
+    }
+
     :root {
       --ink: #131313;
       --paper: #f0e9d8;
@@ -74,6 +101,14 @@
     }
 
     .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; position: relative; }
+
+    /* apple scissors emoji as image — same look on every OS */
+    .emj {
+      height: 1em;
+      width: 1em;
+      vertical-align: -0.12em;
+      display: inline-block;
+    }
 
     /* inked line icons instead of emoji stickers */
     .ico {
@@ -184,14 +219,14 @@
       font-size: clamp(4rem, 12vw, 9rem);
       right: 6%;
       top: 60px;
-      transform: rotate(-115deg);
+      transform: rotate(45deg);
       animation: snip 1.6s ease-in-out infinite;
       z-index: 2;
       user-select: none;
     }
     @keyframes snip {
-      0%, 100% { transform: rotate(-115deg) scale(1); }
-      50%      { transform: rotate(-100deg) scale(1.08); }
+      0%, 100% { transform: rotate(45deg) scale(1); }
+      50%      { transform: rotate(60deg) scale(1.08); }
     }
 
     .hero-decode {
@@ -616,6 +651,23 @@
       .about-grid, .wins { grid-template-columns: 1fr; }
       .hero-scissors { right: 2%; top: 30px; }
       .nav-links a { margin-left: 12px; font-size: 0.95rem; }
+      /* sticker flows under the tagline instead of floating */
+      .st-2 {
+        position: static;
+        display: inline-block;
+        margin-top: 26px;
+        transform: rotate(-3deg);
+      }
+      header { padding-bottom: 70px; }
+      /* receipt fits the screen */
+      .receipt { padding: 14px 10px 20px; }
+      .receipt table { font-size: 0.82rem; }
+      .receipt td { padding: 7px 4px; }
+      .receipt .r { white-space: normal; font-size: 0.75rem; }
+      .receipt .gold { transform: none; padding: 1px 5px; }
+    }
+    @media (max-width: 480px) {
+      .receipt .d { display: none; }
     }
   </style>
 </head>
@@ -623,7 +675,7 @@
 
   <nav>
     <div class="wrap">
-      <a class="nav-logo" href="#">✂️CUT</a>
+      <a class="nav-logo" href="#"><img class="emj" src="photos/scissors-apple.png" alt="">CUT</a>
       <div class="nav-links">
         <a href="#about">who?</a>
         <a href="#wins">wins</a>
@@ -635,21 +687,21 @@
 
   <header>
     <div class="wrap">
-      <span class="hero-scissors" aria-hidden="true">✂️</span>
-      <span class="sticker st-2">no sleep, only flags <svg class="ico" viewBox="0 0 24 24"><path d="M6 21V4"/><path d="M6 4h11l-2.5 3.5L17 11H6"/></svg></span>
+      <span class="hero-scissors" aria-hidden="true"><img class="emj" src="photos/scissors-apple.png" alt=""></span>
 
       <div class="ransom" aria-label="CUT">
         <span class="l1">C</span><span class="l2">U</span><span class="l3">T</span>
       </div>
       <span class="hero-decode">= Central University Team, duh</span>
       <p class="hero-tag">we're a student CTF crew. give us a flag format and a scoreboard — <mark>we cut through the rest</mark>. literally. we have scissors.</p>
+      <span class="sticker st-2">no sleep, only flags <svg class="ico" viewBox="0 0 24 24"><path d="M6 21V4"/><path d="M6 4h11l-2.5 3.5L17 11H6"/></svg></span>
     </div>
   </header>
 
   <div class="marquee m-ink" aria-hidden="true">
     <span class="marquee-inner">
-      CTF{w3_cut_thr0ugh} ✂️ WEB ✂️ PWN ✂️ CRYPTO ✂️ REV ✂️ FORENSICS ✂️ FIRST BLOOD OR NOTHING ✂️&nbsp;
-      CTF{w3_cut_thr0ugh} ✂️ WEB ✂️ PWN ✂️ CRYPTO ✂️ REV ✂️ FORENSICS ✂️ FIRST BLOOD OR NOTHING ✂️&nbsp;
+      CTF{w3_cut_thr0ugh} <img class="emj" src="photos/scissors-apple.png" alt=""> WEB <img class="emj" src="photos/scissors-apple.png" alt=""> PWN <img class="emj" src="photos/scissors-apple.png" alt=""> CRYPTO <img class="emj" src="photos/scissors-apple.png" alt=""> REV <img class="emj" src="photos/scissors-apple.png" alt=""> FORENSICS <img class="emj" src="photos/scissors-apple.png" alt=""> FIRST BLOOD OR NOTHING <img class="emj" src="photos/scissors-apple.png" alt="">&nbsp;
+      CTF{w3_cut_thr0ugh} <img class="emj" src="photos/scissors-apple.png" alt=""> WEB <img class="emj" src="photos/scissors-apple.png" alt=""> PWN <img class="emj" src="photos/scissors-apple.png" alt=""> CRYPTO <img class="emj" src="photos/scissors-apple.png" alt=""> REV <img class="emj" src="photos/scissors-apple.png" alt=""> FORENSICS <img class="emj" src="photos/scissors-apple.png" alt=""> FIRST BLOOD OR NOTHING <img class="emj" src="photos/scissors-apple.png" alt="">&nbsp;
     </span>
   </div>
   <div class="marquee m-pink" aria-hidden="true">
@@ -880,16 +932,28 @@
     if (matchMedia('(pointer: fine)').matches) {
       const sc = document.createElement('div');
       sc.id = 'flying-scissors';
-      sc.innerHTML = '<span class="blades">✂️</span>';
+      sc.innerHTML = '<span class="blades"><img src="photos/scissors-apple.png" alt="" style="width:30px;height:30px;display:block;"></span>';
+      sc.style.opacity = '0'; // hidden until we know where the cursor is
       document.body.appendChild(sc);
 
       let mx = innerWidth / 2, my = innerHeight / 2;
       let x = mx, y = my, ang = 0;
+      let seen = false;
 
-      addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; });
+      addEventListener('mousemove', (e) => {
+        mx = e.clientX;
+        my = e.clientY;
+        if (!seen) {
+          seen = true;
+          x = mx;
+          y = my;
+          sc.style.opacity = '1';
+        }
+      });
 
-      // apple ✂️ has its blades pointing up-left (~135°); this offset aims them at the cursor
-      const BLADE_OFFSET = 135;
+      // the scissors-apple.png artwork has blades pointing straight down (90°);
+      // this offset aims them at the cursor
+      const BLADE_OFFSET = -90;
 
       (function fly() {
         x += (mx - x) * 0.11;
